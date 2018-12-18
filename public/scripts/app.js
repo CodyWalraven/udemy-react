@@ -1,20 +1,23 @@
 "use strict";
 
-console.log("App.js is running, yeah son! huh");
+var app = {
+  header: "Indecision App",
+  paragraph: "An app to help make decisions",
+  list: ["Dog", "Cat"]
 
-//JSX is javascript HTML
-var template = React.createElement(
+  //JSX is javascript HTML
+};var template = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    "Cody"
+    app.header
   ),
   React.createElement(
     "p",
     null,
-    "This is some text"
+    app.paragraph
   ),
   React.createElement(
     "ol",
@@ -22,35 +25,46 @@ var template = React.createElement(
     React.createElement(
       "li",
       null,
-      "Item One"
+      app.list[0]
     ),
     React.createElement(
       "li",
       null,
-      "Item Two"
+      app.list[1]
     )
   )
 );
 
+var user = {
+  name: "Cody",
+  age: 25,
+  location: "Texas"
+};
+function getLocation(location) {
+  if (location) {
+    return React.createElement(
+      "p",
+      null,
+      "Location: ",
+      location
+    );
+  }
+}
 var templateTwo = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    "Cody Walraven"
+    user.name ? user.name : "Anonymous"
   ),
-  React.createElement(
+  user.age > 18 && React.createElement(
     "p",
     null,
-    " Age: 25"
+    "Age: " + user.age
   ),
-  React.createElement(
-    "p",
-    null,
-    " Location Texas"
-  )
+  getLocation(user.location)
 );
-var appRoot = document.getElementById("app");
 
+var appRoot = document.getElementById("app");
 ReactDOM.render(templateTwo, appRoot);
