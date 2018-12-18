@@ -1,8 +1,56 @@
-console.log("App.js is running, yeah son!")
+"use strict";
 
-//let template = <p>This is JSX from app.js!</p>
-var template = React.createElement("h1", { id: "something" }, "Hi person");
+console.log("App.js is running, yeah son! huh");
 
-let appRoot = document.getElementById("app")
+//JSX is javascript HTML
+var template = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Cody"
+  ),
+  React.createElement(
+    "p",
+    null,
+    "This is some text"
+  ),
+  React.createElement(
+    "ol",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "Item One"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "Item Two"
+    )
+  )
+);
 
-ReactDOM.render(template, appRoot)
+var templateTwo = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Cody Walraven"
+  ),
+  React.createElement(
+    "p",
+    null,
+    " Age: 25"
+  ),
+  React.createElement(
+    "p",
+    null,
+    " Location Texas"
+  )
+);
+var appRoot = document.getElementById("app");
+
+ReactDOM.render(templateTwo, appRoot);
