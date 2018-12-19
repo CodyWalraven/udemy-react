@@ -18,3 +18,6 @@ const getFirstNameShort = (fullName) => fullName.split(' ')[0]
 
 console.log(getFirstName("Cody Walraven"))
 console.log(getFirstNameShort("Cody Walraven"))
+
+
+

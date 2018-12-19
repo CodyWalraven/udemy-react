@@ -1,24 +1,27 @@
-'use strict';
+"use strict";
 
-// const square = function (x) {
-//   return x * x
+// arguments object - NO LONGER BOUND!! :)
+// this keyword - NO LONGER BOUND HELL YES
+
+// const add = (a, b) => {
+//   console.log(arguments)
+//   return a + b
 // }
+// console.log(add(55,1, 1001))
 
-// // const squareArrow = (x) => {
-// //   return x * x
-// // }
-// const squareArrow = (x) => x * x 
+var user = {
+  name: "Cody",
+  city: ["Mckinney", "Van Alstyne", "Sherman"],
+  printPlacesLived: function printPlacesLived() {
+    var _this = this;
 
-// console.log(square(8))
-// console.log(squareArrow(8))
+    console.log(this.name);
+    console.log(this.city);
 
-var getFirstName = function getFirstName(fullName) {
-  return fullName.split(' ')[0];
+    this.city.forEach(function (cities) {
+      console.log(_this.name + " has lived in " + cities);
+    });
+  }
 };
 
-var getFirstNameShort = function getFirstNameShort(fullName) {
-  return fullName.split(' ')[0];
-};
-
-console.log(getFirstName("Cody Walraven"));
-console.log(getFirstNameShort("Cody Walraven"));
+user.printPlacesLived();
