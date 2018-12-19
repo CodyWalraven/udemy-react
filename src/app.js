@@ -1,38 +1,42 @@
-let app = {
+const app = {
   header: "Indecision App",
-  paragraph: "An app to help make decisions",
-  list: ["Dog", "Cat"]
+  subtitle: "An app to help make decisions",
+  options: ["Dog", "Cat"]
 }
 
 //JSX is javascript HTML
-let template = (
+const template = (
   <div>
     <h1>{app.header}</h1>
-    <p>{app.paragraph}</p>
+    {app.subtitle && <p>{app.subtitle}</p>}
+    <p>{(app.options.length > 0) ? "Here are your options" : "No options"}</p>
     <ol>
-      <li>{app.list[0]}</li>
-      <li>{app.list[1]}</li>
+      <li>{app.options[0]}</li>
+      <li>{app.options[1]}</li>
     </ol>
   </div>
 )
 
-let user = {
+const user = {
   name: "Cody",
   age: 25,
   location: "Texas"
 }
+
+
+
 function getLocation(location) {
   if (location) {
     return <p>Location: {location}</p>
   } 
 }
-let templateTwo = (
+const templateTwo = (
   <div>
     <h1>{user.name ? user.name : "Anonymous"}</h1>
-    {user.age > 18 && <p>{`Age: ${user.age}`}</p>}
+    {(user.age > 18 && user.age) && <p>{`Age: ${user.age}`}</p>}
     {getLocation(user.location)}
   </div>
 )
 
-let appRoot = document.getElementById("app")
-ReactDOM.render(templateTwo, appRoot)
+const appRoot = document.getElementById("app")
+ReactDOM.render(template, appRoot)
