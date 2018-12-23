@@ -9,15 +9,19 @@
 
 const user = {
   name: "Cody",
-  city: ["Mckinney", "Van Alstyne", "Sherman"],
-  printPlacesLived: function() {
-    console.log(this.name)
-    console.log(this.city)
-
-    this.city.forEach((cities) => {
-      console.log(`${this.name} has lived in ${cities}`)
-    })
+  cities: ["Mckinney", "Van Alstyne", "Sherman"],
+  printPlacesLived() {
+    return this.cities.map((city) => `${this.name} has lived in: ${city}`)
   }
 }
 
-user.printPlacesLived()
+const multiplier = {
+  numbers: [10, 20, 30],
+  multiplyBy: 3,
+  multiply(){
+    return this.numbers.map((val) => val * this.multiplyBy)
+  }
+}
+
+console.log(user.printPlacesLived());
+console.log(multiplier.multiply());
