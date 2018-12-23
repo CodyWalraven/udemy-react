@@ -33,7 +33,7 @@ const render = () => {
       <ol>
         {
           app.options.map((num, index) => {
-            return <p key={index}>{++index}: {num}</p>
+            return <li key={index}>{num}</li>
           })       
         }
       </ol>

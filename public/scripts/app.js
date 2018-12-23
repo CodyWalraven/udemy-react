@@ -54,10 +54,8 @@ var render = function render() {
       null,
       app.options.map(function (num, index) {
         return React.createElement(
-          "p",
+          "li",
           { key: index },
-          ++index,
-          ": ",
           num
         );
       })
