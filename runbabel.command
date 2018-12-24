@@ -1,2 +1,2 @@
 #! /bin/zsh
-babel src/app.js --out-file=public/scripts/app.js --presets=react,env --watch
+babel src/playground/es6-classes1.js --out-file=public/scripts/app.js --presets=react,env --watch
