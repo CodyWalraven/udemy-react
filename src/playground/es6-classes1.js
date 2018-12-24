@@ -5,7 +5,7 @@ class Person {
   }
 
   getGreeting() {
-    return `Hi ${this.name} how are you doing?`
+    return `Hi. I am ${this.name}`
   }
 
   getDescription() {
@@ -18,22 +18,37 @@ class Student extends Person {
     super(name, age)
     this.major = major
   }
+
   hasMajor() {
-    return !!this.major 
+    return !!this.major
   }
+
   getDescription() {
     let description = super.getDescription()
 
     if (this.hasMajor()) {
       description += ` Their major is ${this.major}`
     }
-
     return description
   }
 }
 
-const me = new Student("Cody", 25, "science")
-console.log(me.getDescription())
+class Traveler extends Person {
+  constructor(name, age, homeLocation) {
+    super(name, age)
+    this.homeLocation = homeLocation
+  }
 
-const other = new Student()
-console.log(other.getDescription())
+  getGreeting() {
+    let greeting = super.getGreeting()
+
+    if (!!this.homeLocation)
+      greeting += ` I'm visiting from ${this.homeLocation}`
+    return greeting
+  }
+}
+const me = new Traveler("Cody", 25, "Amsterdam")
+console.log(me.getGreeting())
+
+const other = new Traveler()
+console.log(other.getGreeting())
