@@ -3,11 +3,14 @@ class IndecisionApp extends React.Component {
     super(props)
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
     this.state = {
-      options: ["One", "Two", "Three"]
+      options: ["One", "Two", "Three", "Four"]
     }
   }
   handleDeleteOptions () {
     this.setState(() => {
+      for (let x = 0; x < 5; x++){
+        console.log("hi")
+      }
       return {
         options: []
       }

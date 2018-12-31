@@ -18,7 +18,7 @@ var IndecisionApp = function (_React$Component) {
 
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
     _this.state = {
-      options: ["One", "Two", "Three"]
+      options: ["One", "Two", "Three", "Four"]
     };
     return _this;
   }
@@ -27,6 +27,9 @@ var IndecisionApp = function (_React$Component) {
     key: "handleDeleteOptions",
     value: function handleDeleteOptions() {
       this.setState(function () {
+        for (var x = 0; x < 5; x++) {
+          console.log("hi");
+        }
         return {
           options: []
         };
