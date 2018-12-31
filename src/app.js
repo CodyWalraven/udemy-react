@@ -2,19 +2,35 @@ class IndecisionApp extends React.Component {
   constructor(props){
     super(props)
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
+    this.handleOnPick = this.handleOnPick.bind(this)
+    this.handleAddOption = this.handleAddOption.bind(this)
     this.state = {
-      options: ["One", "Two", "Three", "Four"]
+      options: []
     }
   }
+
   handleDeleteOptions () {
     this.setState(() => {
-      for (let x = 0; x < 5; x++){
-        console.log("hi")
-      }
       return {
         options: []
       }
     })
+  }
+
+  handleOnPick() {
+    const selectedChoice = this.state.options[Math.floor(Math.random() * this.state.options.length)]
+    alert(selectedChoice)
+  }
+
+  handleAddOption(choice) {
+    choice.preventDefault()
+    const option = choice.target.elements.option.value.trim()
+    choice.target.elements.option.value = ""
+    this.setState((prevState) => {
+      return {
+        options: [...prevState.options, option]
+      }
+    }) 
   }
 
   render() {
@@ -23,9 +39,9 @@ class IndecisionApp extends React.Component {
     return (
       <div>
         <Header title={title} subTitle={subTitle} />
-        <Action hasOptions={this.state.options.length > 0} />
+        <Action hasOptions={this.state.options.length > 0} handleOnPick={this.handleOnPick} />
         <Options options={this.state.options} handleDeleteOptions={this.handleDeleteOptions} />
-        <AddOption />
+        <AddOption handleAddOption={this.handleAddOption}/>
       </div>
     )
   }
@@ -43,11 +59,10 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-
   render() {
     return (
       <div>
-        <button onClick={this.handlePick}
+        <button onClick={this.props.handleOnPick}
         disabled={!this.props.hasOptions}
       >
         What should I do?</button>
@@ -57,7 +72,6 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
-
   render() {
     return (
       <div>
@@ -86,7 +100,7 @@ class AddOption extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleAddOption}>
+        <form onSubmit={this.props.handleAddOption}>
           <input type="text" name="option" />
           <button>Add New Item</button>
         </form>
