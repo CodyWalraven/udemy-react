@@ -10,11 +10,7 @@ class IndecisionApp extends React.Component {
   }
 
   handleDeleteOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      }
-    })
+    this.setState(() => ({options: []}))
   }
 
   handleOnPick() {
@@ -26,11 +22,7 @@ class IndecisionApp extends React.Component {
 
   handleAddOption(choice) {
     if (choice && !this.state.options.includes(choice)) {
-      this.setState(prevState => {
-        return {
-          options: prevState.options.concat(choice)
-        }
-      })
+      this.setState((prevState) => ({options: prevState.options.concat(choice)}))
     } else {
       alert("Enter a non duplicate value")
     }

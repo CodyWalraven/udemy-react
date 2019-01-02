@@ -29,9 +29,7 @@ var IndecisionApp = function (_React$Component) {
     key: "handleDeleteOptions",
     value: function handleDeleteOptions() {
       this.setState(function () {
-        return {
-          options: []
-        };
+        return { options: [] };
       });
     }
   }, {
@@ -45,9 +43,7 @@ var IndecisionApp = function (_React$Component) {
     value: function handleAddOption(choice) {
       if (choice && !this.state.options.includes(choice)) {
         this.setState(function (prevState) {
-          return {
-            options: prevState.options.concat(choice)
-          };
+          return { options: prevState.options.concat(choice) };
         });
       } else {
         alert("Enter a non duplicate value");
