@@ -1,5 +1,5 @@
 class IndecisionApp extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
     this.handleOnPick = this.handleOnPick.bind(this)
@@ -9,7 +9,7 @@ class IndecisionApp extends React.Component {
     }
   }
 
-  handleDeleteOptions () {
+  handleDeleteOptions() {
     this.setState(() => {
       return {
         options: []
@@ -18,19 +18,21 @@ class IndecisionApp extends React.Component {
   }
 
   handleOnPick() {
-    const selectedChoice = this.state.options[Math.floor(Math.random() * this.state.options.length)]
+    const selectedChoice = this.state.options[
+      Math.floor(Math.random() * this.state.options.length)
+    ]
     alert(selectedChoice)
   }
 
   handleAddOption(choice) {
-    choice.preventDefault()
-    const option = choice.target.elements.option.value.trim()
-    choice.target.elements.option.value = ""
-    this.setState((prevState) => {
-      return {
-        options: [...prevState.options, option]
-      }
-    }) 
+    if (choice) {
+      this.setState(prevState => {
+        return {
+          //options: [...prevState.options, option]
+          options: prevState.options.concat(choice)
+        }
+      })
+    }
   }
 
   render() {
@@ -39,9 +41,15 @@ class IndecisionApp extends React.Component {
     return (
       <div>
         <Header title={title} subTitle={subTitle} />
-        <Action hasOptions={this.state.options.length > 0} handleOnPick={this.handleOnPick} />
-        <Options options={this.state.options} handleDeleteOptions={this.handleDeleteOptions} />
-        <AddOption handleAddOption={this.handleAddOption}/>
+        <Action
+          hasOptions={this.state.options.length > 0}
+          handleOnPick={this.handleOnPick}
+        />
+        <Options
+          options={this.state.options}
+          handleDeleteOptions={this.handleDeleteOptions}
+        />
+        <AddOption handleAddOption={this.handleAddOption} />
       </div>
     )
   }
@@ -62,10 +70,12 @@ class Action extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.handleOnPick}
-        disabled={!this.props.hasOptions}
-      >
-        What should I do?</button>
+        <button
+          onClick={this.props.handleOnPick}
+          disabled={!this.props.hasOptions}
+        >
+          What should I do?
+        </button>
       </div>
     )
   }
@@ -91,16 +101,21 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+  constructor(props){
+    super(props)
+    this.handleAddOption = this.handleAddOption.bind(this)
+  }
   handleAddOption(e) {
     e.preventDefault()
     const option = e.target.elements.option.value.trim()
-    if (option) alert(option)
+    e.target.elements.option.value = ""
+    if (option) this.props.handleAddOption(option)
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleAddOption}>
+        <form onSubmit={this.handleAddOption}>
           <input type="text" name="option" />
           <button>Add New Item</button>
         </form>
