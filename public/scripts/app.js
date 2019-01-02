@@ -19,6 +19,7 @@ var IndecisionApp = function (_React$Component) {
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
     _this.handleOnPick = _this.handleOnPick.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
+    _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
     _this.state = {
       options: props.options
     };
@@ -33,6 +34,17 @@ var IndecisionApp = function (_React$Component) {
       });
     }
   }, {
+    key: "handleDeleteOption",
+    value: function handleDeleteOption(optionToRemove) {
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.filter(function (x) {
+            return x !== optionToRemove;
+          })
+        };
+      });
+    }
+  }, {
     key: "handleOnPick",
     value: function handleOnPick() {
       var selectedChoice = this.state.options[Math.floor(Math.random() * this.state.options.length)];
@@ -43,7 +55,9 @@ var IndecisionApp = function (_React$Component) {
     value: function handleAddOption(choice) {
       if (choice && !this.state.options.includes(choice)) {
         this.setState(function (prevState) {
-          return { options: prevState.options.concat(choice) };
+          return {
+            options: prevState.options.concat(choice)
+          };
         });
       } else {
         alert("Enter a non duplicate value");
@@ -63,7 +77,8 @@ var IndecisionApp = function (_React$Component) {
         }),
         React.createElement(Options, {
           options: this.state.options,
-          handleDeleteOptions: this.handleDeleteOptions
+          handleDeleteOptions: this.handleDeleteOptions,
+          handleDeleteOption: this.handleDeleteOption
         }),
         React.createElement(AddOption, { handleAddOption: this.handleAddOption })
       );
@@ -104,10 +119,7 @@ var Action = function Action(props) {
     null,
     React.createElement(
       "button",
-      {
-        onClick: props.handleOnPick,
-        disabled: !props.hasOptions
-      },
+      { onClick: props.handleOnPick, disabled: !props.hasOptions },
       "What should I do?"
     )
   );
@@ -123,7 +135,11 @@ var Options = function Options(props) {
       "Remove All"
     ),
     props.options.map(function (val) {
-      return React.createElement(Option, { key: val, option: val });
+      return React.createElement(Option, {
+        key: val,
+        option: val,
+        handleDeleteOption: props.handleDeleteOption
+      });
     })
   );
 };
@@ -132,7 +148,14 @@ var Option = function Option(props) {
   return React.createElement(
     "div",
     null,
-    props.option
+    props.option,
+    React.createElement(
+      "button",
+      { onClick: function onClick(e) {
+          props.handleDeleteOption(props.option);
+        } },
+      "X"
+    )
   );
 };
 
