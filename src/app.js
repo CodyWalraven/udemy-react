@@ -6,7 +6,27 @@ class IndecisionApp extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this)
     this.handleDeleteOption = this.handleDeleteOption.bind(this)
     this.state = {
-      options: props.options
+      options: []
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options)
+      localStorage.setItem("options", json)
+    }
+  }
+
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem("options")
+      const options = JSON.parse(json)
+
+      if (options) {
+        this.setState(() => ({ options }))
+      }
+    } catch (error) {
+      console.log(`localstorage ${error}`)
     }
   }
 
@@ -15,8 +35,8 @@ class IndecisionApp extends React.Component {
   }
 
   handleDeleteOption(optionToRemove) {
-    this.setState((prevState) => ({
-      options: prevState.options.filter((x) => x !== optionToRemove)
+    this.setState(prevState => ({
+      options: prevState.options.filter(x => x !== optionToRemove)
     }))
   }
 
@@ -57,10 +77,6 @@ class IndecisionApp extends React.Component {
   }
 }
 
-IndecisionApp.defaultProps = {
-  options: []
-}
-
 const Header = props => {
   return (
     <div>
@@ -88,6 +104,7 @@ const Options = props => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Remove All</button>
+      {props.options.length === 0 && <p>Please add an option to get started</p>}
       {props.options.map(val => (
         <Option
           key={val}
@@ -103,9 +120,13 @@ const Option = props => {
   return (
     <div>
       {props.option}
-      <button onClick={(e) => {
-        props.handleDeleteOption(props.option)
-      }}>X</button>
+      <button
+        onClick={e => {
+          props.handleDeleteOption(props.option)
+        }}
+      >
+        X
+      </button>
     </div>
   )
 }
@@ -117,6 +138,7 @@ class AddOption extends React.Component {
   }
   handleAddOption(e) {
     e.preventDefault()
+
     const option = e.target.elements.option.value.trim()
     e.target.elements.option.value = ""
     if (option) this.props.handleAddOption(option)

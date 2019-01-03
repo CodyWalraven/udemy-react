@@ -5,7 +5,25 @@ class Counter extends React.Component {
     this.handleMinusOne = this.handleMinusOne.bind(this)
     this.handleReset = this.handleReset.bind(this)
     this.state = {
-      count: props.count
+      count: 0
+    }
+  }
+
+  componentDidUpdate(){
+    //Set the local storage to current count value on every update
+    localStorage.setItem("count", this.state.count)
+  }
+
+  componentDidMount(){
+    //If the count value does not exist in localstorage initialize it to 0
+    if(!localStorage.getItem("count")){
+      localStorage.setItem("count", 0)
+    } 
+    try{
+      const count = parseInt(localStorage.getItem("count"), 10)
+      this.setState(() => ({count}))
+    }catch(error){
+      console.log(`Unable to read localStorage error: ${error}`)
     }
   }
   
@@ -45,11 +63,7 @@ class Counter extends React.Component {
   }
 }
 
-Counter.defaultProps = {
-  count: 0
-}
-
-ReactDOM.render(<Counter count={5}/>, document.getElementById("app"))
+ReactDOM.render(<Counter />, document.getElementById("app"))
 
 // let count = 0
 // const addOne = () => {
