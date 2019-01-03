@@ -27,24 +27,22 @@ var Counter = function (_React$Component) {
 
   _createClass(Counter, [{
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      //Set the local storage to current count value on every update
-      localStorage.setItem("count", this.state.count);
+    value: function componentDidUpdate(prevProps, prevState) {
+      //Set the local storage to current count only if value changes
+      if (prevState.count !== this.state.count) {
+        localStorage.setItem("count", this.state.count);
+      }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      //If the count value does not exist in localstorage initialize it to 0
-      if (!localStorage.getItem("count")) {
-        localStorage.setItem("count", 0);
-      }
-      try {
-        var count = parseInt(localStorage.getItem("count"), 10);
+      var stringCount = localStorage.getItem("count");
+      var count = parseInt(stringCount);
+
+      if (!isNaN(count)) {
         this.setState(function () {
           return { count: count };
         });
-      } catch (error) {
-        console.log("Unable to read localStorage error: " + error);
       }
     }
   }, {

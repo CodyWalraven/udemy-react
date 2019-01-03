@@ -9,21 +9,19 @@ class Counter extends React.Component {
     }
   }
 
-  componentDidUpdate(){
-    //Set the local storage to current count value on every update
-    localStorage.setItem("count", this.state.count)
+  componentDidUpdate(prevProps, prevState){
+    //Set the local storage to current count only if value changes
+    if (prevState.count !== this.state.count){
+      localStorage.setItem("count", this.state.count)
+    }
   }
 
   componentDidMount(){
-    //If the count value does not exist in localstorage initialize it to 0
-    if(!localStorage.getItem("count")){
-      localStorage.setItem("count", 0)
-    } 
-    try{
-      const count = parseInt(localStorage.getItem("count"), 10)
+    const stringCount = localStorage.getItem("count")
+    const count = parseInt(stringCount)
+
+    if (!isNaN(count)){
       this.setState(() => ({count}))
-    }catch(error){
-      console.log(`Unable to read localStorage error: ${error}`)
     }
   }
   
