@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _person__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./person */ \"./src/person.js\");\n\r\n\r\nconsole.log(Object(_person__WEBPACK_IMPORTED_MODULE_0__[\"isAdult\"])(17))\r\nconsole.log(Object(_person__WEBPACK_IMPORTED_MODULE_0__[\"canDrink\"])(22))\r\n\r\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _person_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./person.js */ \"./src/person.js\");\n\n\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_0__[\"isAdult\"])(17))\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_0__[\"canDrink\"])(22))\nconsole.log(Object(_person_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(67))\n\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -102,11 +102,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _per
 /*!***********************!*\
   !*** ./src/person.js ***!
   \***********************/
-/*! exports provided: isAdult, canDrink */
+/*! exports provided: isAdult, canDrink, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isAdult\", function() { return isAdult; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"canDrink\", function() { return canDrink; });\nconst isAdult = (age) => age >= 18\r\nconst canDrink = (age) => age >= 21\r\n\n\n//# sourceURL=webpack:///./src/person.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isAdult\", function() { return isAdult; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"canDrink\", function() { return canDrink; });\nconst isAdult = (age) => age >= 18\n\nconst canDrink = (age) => age >= 21\n\nconst isSenior = (age) => {\n  if (age >= 65) return `😊`\n  else return \"Nope not old enough\"\n}\n/* harmony default export */ __webpack_exports__[\"default\"] = (isSenior);\n\n\n\n\n\n//# sourceURL=webpack:///./src/person.js?");
 
 /***/ })
 
