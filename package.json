@@ -11,9 +11,13 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "live-server": "^1.2.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "validator": "^10.10.0",
     "webpack": "^4.28.3"
   },

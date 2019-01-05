@@ -1,9 +1,6 @@
-import validator from 'validator'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import isSenior, {isAdult, canDrink} from './person.js'
+const template = <h1>Test</h1>
 
-console.log(isAdult(17))
-console.log(canDrink(22))
-console.log(isSenior(67))
-//
-
+ReactDOM.render(template, document.getElementById('app'))
