@@ -1,4 +1,4 @@
-# Project Title
+# Indecision App
 
 The Indeciesion App from a udemy course.
 
