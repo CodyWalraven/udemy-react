@@ -3,10 +3,13 @@ import AddOption from './AddOption'
 import Header from './Header'
 import Action from './Action'
 import Options from './Options'
+import OptionModal from './OptionModal'
+
 
 export default class IndecisionApp extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption: undefined
   }
 
   handleDeleteOptions = () => {
@@ -20,10 +23,9 @@ export default class IndecisionApp extends React.Component {
   }
 
   handleOnPick = () => {
-    const selectedChoice = this.state.options[
-      Math.floor(Math.random() * this.state.options.length)
-    ]
-    alert(selectedChoice)
+    const randomNumber = Math.floor(Math.random() * this.state.options.length)
+    const selectedOption = this.state.options[randomNumber]
+    this.setState(() => ({selectedOption}))
   }
 
   handleAddOption = (choice) => {
@@ -34,6 +36,12 @@ export default class IndecisionApp extends React.Component {
     } else {
       alert("Enter a non duplicate value")
     }
+  }
+
+  clearSelectedOption = () => {
+    this.setState(() => ({
+      selectedOption: undefined
+    }))
   }
 
   componentDidMount(){
@@ -71,6 +79,11 @@ export default class IndecisionApp extends React.Component {
           handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption handleAddOption={this.handleAddOption} />
+
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          clearSelectedOption={this.clearSelectedOption}
+        />
       </div>
     )
   }
